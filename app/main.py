@@ -23,7 +23,7 @@ class MapaDeSalaApp:
     def configurar_interface(self):
         # Frame para centralizar a interface
         self.frame = tk.Frame(self.root)
-        self.frame.grid(row=0, column=0, sticky="nsew")
+        self.frame.place(relx=0.5, rely=0.5, anchor='center')  # Centraliza o frame
 
         # Área de desenho para o mapa
         self.canvas = tk.Canvas(self.frame, width=800, height=600, bg="white")
