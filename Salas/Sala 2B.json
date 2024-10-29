@@ -1,0 +1,50 @@
+{
+    "nome_sala": "Sala 2B",
+    "mapa": [
+        [
+            "Mesa 1",
+            "Mesa 2",
+            "Mesa 3",
+            "Mesa 4",
+            "Mesa 5"
+        ],
+        [
+            "Mesa 1",
+            "Mesa 2",
+            "Mesa 3",
+            "Mesa 4",
+            "Mesa 5"
+        ],
+        [
+            "Mesa 1",
+            "Mesa 2",
+            "Mesa 3",
+            "Mesa 4",
+            "Mesa 5"
+        ],
+        [
+            "Mesa 1",
+            "Mesa 2",
+            "Mesa 3",
+            "Mesa 4",
+            "Mesa 5"
+        ],
+        [
+            "Mesa 1",
+            "Mesa 2",
+            "Mesa 3",
+            "Mesa 4",
+            "Mesa 5"
+        ],
+        [
+            "Mesa 1",
+            "Mesa 2",
+            "Mesa 3",
+            "Mesa 4",
+            "Mesa 5",
+            "Mesa 6",
+            "Mesa 7"
+        ]
+    ],
+    "mesa_professor": null
+}

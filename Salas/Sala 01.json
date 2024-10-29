@@ -1,0 +1,27 @@
+{
+    "nome_sala": "Sala 01",
+    "mapa": [
+        [
+            "Mesa 1",
+            "Mesa 2",
+            "Mesa 3",
+            "Mesa 4",
+            "Mesa 5"
+        ],
+        [
+            "Mesa 1",
+            "Mesa 2",
+            "Mesa 3",
+            "Mesa 4",
+            "Mesa 5"
+        ],
+        [
+            "Mesa 1",
+            "Mesa 2",
+            "Mesa 3",
+            "Mesa 4",
+            "Mesa 5"
+        ]
+    ],
+    "mesa_professor": null
+}
