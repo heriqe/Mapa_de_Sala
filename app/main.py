@@ -21,39 +21,50 @@ class MapaDeSalaApp:
         self.configurar_interface()
 
     def configurar_interface(self):
+        # Frame para centralizar a interface
+        self.frame = tk.Frame(self.root)
+        self.frame.grid(row=0, column=0, sticky="nsew")
+
         # Área de desenho para o mapa
-        self.canvas = tk.Canvas(self.root, width=800, height=600, bg="white")
+        self.canvas = tk.Canvas(self.frame, width=800, height=600, bg="white")
         self.canvas.grid(row=0, column=0, columnspan=3)
 
         # Label e botão para renomear a sala
-        self.nome_sala_label = tk.Label(self.root, text="Nome da Sala:")
+        self.nome_sala_label = tk.Label(self.frame, text="Nome da Sala:")
         self.nome_sala_label.grid(row=1, column=0)
         
-        self.nome_sala_entry = tk.Entry(self.root, width=20)
+        self.nome_sala_entry = tk.Entry(self.frame, width=20)
         self.nome_sala_entry.insert(0, self.mapa_sala.nome_sala)
         self.nome_sala_entry.grid(row=1, column=1)
 
-        self.renomear_button = tk.Button(self.root, text="Renomear Sala", command=self.renomear_sala)
+        self.renomear_button = tk.Button(self.frame, text="Renomear Sala", command=self.renomear_sala)
         self.renomear_button.grid(row=1, column=2)
 
-        self.adicionar_fileira_button = tk.Button(self.root, text="Adicionar Fileira", command=self.adicionar_fileira)
+        self.adicionar_fileira_button = tk.Button(self.frame, text="Adicionar Fileira", command=self.adicionar_fileira)
         self.adicionar_fileira_button.grid(row=2, column=0)
 
-        self.remover_fileira_button = tk.Button(self.root, text="Remover Fileira", command=self.remover_fileira)
+        self.remover_fileira_button = tk.Button(self.frame, text="Remover Fileira", command=self.remover_fileira)
         self.remover_fileira_button.grid(row=2, column=1)
 
-        self.importar_button = tk.Button(self.root, text="Importar Mapa", command=self.importar_mapa)
+        self.importar_button = tk.Button(self.frame, text="Importar Mapa", command=self.importar_mapa)
         self.importar_button.grid(row=2, column=2)
 
-        self.exportar_button = tk.Button(self.root, text="Exportar Mapa", command=self.exportar_mapa)
+        self.exportar_button = tk.Button(self.frame, text="Exportar Mapa", command=self.exportar_mapa)
         self.exportar_button.grid(row=3, column=0, columnspan=3)
         
-        self.exibir_mapa_button = tk.Button(self.root, text="Exibir Mapa", command=self.exibir_mapa)
+        self.exibir_mapa_button = tk.Button(self.frame, text="Exibir Mapa", command=self.exibir_mapa)
         self.exibir_mapa_button.grid(row=4, column=0, columnspan=3)
 
         # Adiciona uma fileira inicial para garantir que a mesa do professor tenha espaço
         self.mapa_sala.adicionar_fileira(3)  # Adiciona 3 mesas de alunos como exemplo
         self.desenhar_mapa()  # Desenha o mapa inicial
+
+        # Centraliza a grid
+        self.frame.grid_rowconfigure(0, weight=1)  # Canvas
+        self.frame.grid_rowconfigure(1, weight=0)  # Nome da sala e botão
+        self.frame.grid_rowconfigure(2, weight=0)  # Botões de adicionar e remover fileiras
+        self.frame.grid_rowconfigure(3, weight=0)  # Botões de exportar e exibir
+        self.frame.grid_rowconfigure(4, weight=0)  # Botão de exibir mapa
 
     def fechar_fullscreen(self, event=None):
         self.root.attributes('-fullscreen', False)  # Desativa o modo de tela cheia
