@@ -1,3 +1,5 @@
+# app/main.py
+
 import tkinter as tk
 from tkinter import messagebox, simpledialog, filedialog
 from mapa.mapa_de_sala import MapaDeSala  # Importa a classe MapaDeSala
@@ -12,6 +14,10 @@ class MapaDeSalaApp:
         
         # Configuração da interface
         self.configurar_interface()
+
+        # Adiciona uma fileira inicial para garantir que a mesa do professor tenha espaço
+        self.mapa_sala.adicionar_fileira(3)  # Adiciona 3 mesas de alunos como exemplo
+        self.desenhar_mapa()  # Desenha o mapa inicial
 
     def configurar_interface(self):
         # Área de desenho para o mapa
@@ -62,27 +68,24 @@ class MapaDeSalaApp:
     def desenhar_mapa(self):
         self.canvas.delete("all")  # Limpa o canvas
 
-        # Desenha as fileiras
+        # Desenha a mesa do professor no centro
+        mesa_prof_x = 150  # Posição X da mesa do professor
+        mesa_prof_y = 125  # Posição Y da mesa do professor
+
+        self.canvas.create_rectangle(mesa_prof_x, mesa_prof_y, mesa_prof_x + 60, mesa_prof_y + 40, fill="yellow", outline="black")
+        self.canvas.create_text(mesa_prof_x + 30, mesa_prof_y + 20, text="Professor", fill="black")
+
+        # Desenha as fileiras, evitando mesas adjacentes à mesa do professor
         for i, fileira in enumerate(self.mapa_sala.mapa):
             y = 50 + i * 50  # Distância entre fileiras
             for j, mesa in enumerate(fileira):
+                # Evitar adicionar mesas adjacentes à mesa do professor
+                if i == 2 and (j == 1):  # Esta posição (2, 1) seria adjacente à mesa do professor
+                    continue  # Pula a mesa adjacente
+
                 x = 50 + j * 70  # Distância entre mesas
                 self.canvas.create_rectangle(x, y, x + 60, y + 40, fill="lightblue", outline="black")
                 self.canvas.create_text(x + 30, y + 20, text=mesa)  # Adiciona o número da mesa
-
-        # Se houver fileiras, define a mesa do professor no centro
-        if self.mapa_sala.mapa:
-            num_fileiras = len(self.mapa_sala.mapa)
-            num_mesas = len(self.mapa_sala.mapa[num_fileiras // 2]) if num_fileiras > 0 else 0
-            pos_fileira_prof = num_fileiras // 2  # Fileira central
-            pos_mesa_prof = num_mesas // 2 if num_mesas > 0 else 0  # Mesa central
-
-            x = 50 + pos_mesa_prof * 70  # Posição da mesa do professor
-            y = 50 + pos_fileira_prof * 50  # Posição da fileira do professor
-
-            # Destaque para a mesa do professor
-            self.canvas.create_rectangle(x, y, x + 60, y + 40, fill="yellow", outline="black")
-            self.canvas.create_text(x + 30, y + 20, text="Professor", fill="black")
 
 # Inicializar a aplicação Tkinter
 if __name__ == "__main__":
