@@ -82,15 +82,20 @@ class MapaDeSalaApp:
         # Desenha as fileiras
         for i, fileira in enumerate(self.mapa_sala.mapa):
             y = 50 + i * 50  # Distância entre fileiras
+            num_mesas = len(fileira)
+            largura_canvas = 400  # Largura do canvas
+            espaco_total = num_mesas * 70  # Espaço total ocupado pelas mesas
+            margem = (largura_canvas - espaco_total) // 2  # Margem para centralizar mesas
+            
             for j, mesa in enumerate(fileira):
-                x = 50 + j * 70  # Distância entre mesas
+                x = margem + j * 70  # Posição X da mesa centralizada
                 self.canvas.create_rectangle(x, y, x + 60, y + 40, fill="lightblue", outline="black")
                 self.canvas.create_text(x + 30, y + 20, text=mesa)  # Adiciona o número da mesa
 
         # Desenha a mesa do professor na fileira acima da última fileira adicionada
         if self.mapa_sala.mapa:  # Verifica se há fileiras
             mesa_prof_fileira = len(self.mapa_sala.mapa)  # Fileira logo acima da última
-            mesa_prof_x = 150  # Posição X da mesa do professor
+            mesa_prof_x = (400 - 60) // 2  # Centraliza a mesa do professor
             mesa_prof_y = 50 + mesa_prof_fileira * 50  # Posição Y da mesa do professor
 
             self.canvas.create_rectangle(mesa_prof_x, mesa_prof_y, mesa_prof_x + 60, mesa_prof_y + 40, fill="yellow", outline="black")
