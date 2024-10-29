@@ -1,9 +1,7 @@
-# app/main.py
-
 import tkinter as tk
 from tkinter import messagebox, simpledialog, filedialog
-from mapa_de_sala.mapa import MapaDeSala  # Importa a classe MapaDeSala
-
+from mapa.mapa_de_sala import MapaDeSala
+  # Importa a classe MapaDeSala
 class MapaDeSalaApp:
     def __init__(self, root):
         self.root = root
