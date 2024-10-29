@@ -2,6 +2,7 @@
 
 import tkinter as tk
 from tkinter import messagebox, simpledialog, filedialog
+import json
 from mapa.mapa_de_sala import MapaDeSala  # Importa a classe MapaDeSala
 
 class MapaDeSalaApp:
@@ -37,6 +38,9 @@ class MapaDeSalaApp:
         self.remover_fileira_button = tk.Button(self.root, text="Remover Fileira", command=self.remover_fileira)
         self.remover_fileira_button.grid(row=2, column=1)
 
+        self.importar_button = tk.Button(self.root, text="Importar Mapa", command=self.importar_mapa)
+        self.importar_button.grid(row=2, column=2)
+
         self.exportar_button = tk.Button(self.root, text="Exportar Mapa", command=self.exportar_mapa)
         self.exportar_button.grid(row=3, column=0, columnspan=3)
         
@@ -66,6 +70,23 @@ class MapaDeSalaApp:
             self.desenhar_mapa()  # Desenha o mapa atualizado
         else:
             messagebox.showwarning("Remover Fileira", "Não há fileiras para remover.")
+
+    def importar_mapa(self):
+        caminho_arquivo = filedialog.askopenfilename(filetypes=[("JSON Files", "*.json")])
+        if caminho_arquivo:
+            try:
+                with open(caminho_arquivo, 'r') as f:
+                    mapa_dict = json.load(f)
+                    self.mapa_sala.nomear_sala(mapa_dict["nome_sala"])
+                    self.mapa_sala.mapa = mapa_dict["mapa"]
+                    self.mapa_sala.mesa_professor = (
+                        mapa_dict["mesa_professor"]["fileira"], 
+                        mapa_dict["mesa_professor"]["mesa"]
+                    ) if mapa_dict["mesa_professor"] else None
+                    messagebox.showinfo("Importar Mapa", f"Mapa importado de {caminho_arquivo}.")
+                    self.desenhar_mapa()  # Desenha o mapa atualizado
+            except Exception as e:
+                messagebox.showerror("Erro", f"Erro ao importar o mapa: {e}")
 
     def exportar_mapa(self):
         caminho_arquivo = filedialog.asksaveasfilename(defaultextension=".json", filetypes=[("JSON Files", "*.json")])
