@@ -1,0 +1,22 @@
+{
+    "nome_sala": "Laborat\u00f3rio de Inform\u00e1tica",
+    "mapa": [
+        [
+            "Mesa 1",
+            "Mesa 2",
+            "Mesa 3",
+            "Mesa 4",
+            "Mesa 5"
+        ],
+        [
+            "Mesa 1",
+            "Mesa 2",
+            "Mesa 3",
+            "Mesa 4"
+        ]
+    ],
+    "mesa_professor": {
+        "fileira": 0,
+        "mesa": 0
+    }
+}
