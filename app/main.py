@@ -10,6 +10,10 @@ class MapaDeSalaApp:
         self.root = root
         self.root.title("Mapa de Sala Escolar")
         
+        # Definindo o aplicativo em tela cheia
+        self.root.attributes('-fullscreen', True)
+        self.root.bind("<Escape>", self.fechar_fullscreen)  # Permite sair do modo de tela cheia pressionando Esc
+
         # Dados iniciais do mapa
         self.mapa_sala = MapaDeSala("Sala 101")
         
@@ -18,7 +22,7 @@ class MapaDeSalaApp:
 
     def configurar_interface(self):
         # Área de desenho para o mapa
-        self.canvas = tk.Canvas(self.root, width=400, height=300, bg="white")
+        self.canvas = tk.Canvas(self.root, width=800, height=600, bg="white")
         self.canvas.grid(row=0, column=0, columnspan=3)
 
         # Label e botão para renomear a sala
@@ -51,17 +55,23 @@ class MapaDeSalaApp:
         self.mapa_sala.adicionar_fileira(3)  # Adiciona 3 mesas de alunos como exemplo
         self.desenhar_mapa()  # Desenha o mapa inicial
 
+    def fechar_fullscreen(self, event=None):
+        self.root.attributes('-fullscreen', False)  # Desativa o modo de tela cheia
+
     def renomear_sala(self):
         novo_nome = self.nome_sala_entry.get()
         self.mapa_sala.nomear_sala(novo_nome)
         messagebox.showinfo("Renomear Sala", f"A sala foi renomeada para {novo_nome}.")
 
     def adicionar_fileira(self):
-        num_mesas = simpledialog.askinteger("Adicionar Fileira", "Quantas mesas nesta fileira?")
-        if num_mesas:
-            self.mapa_sala.adicionar_fileira(num_mesas)
-            messagebox.showinfo("Adicionar Fileira", f"Fileira com {num_mesas} mesas adicionada.")
-            self.desenhar_mapa()  # Desenha o mapa atualizado
+        if len(self.mapa_sala.mapa) < 10:  # Limita a 10 fileiras
+            num_mesas = simpledialog.askinteger("Adicionar Fileira", "Quantas mesas nesta fileira?")
+            if num_mesas:
+                self.mapa_sala.adicionar_fileira(num_mesas)
+                messagebox.showinfo("Adicionar Fileira", f"Fileira com {num_mesas} mesas adicionada.")
+                self.desenhar_mapa()  # Desenha o mapa atualizado
+        else:
+            messagebox.showwarning("Limite de Fileiras", "O máximo de 10 fileiras já foi atingido.")
 
     def remover_fileira(self):
         if self.mapa_sala.mapa:
@@ -104,7 +114,7 @@ class MapaDeSalaApp:
         for i, fileira in enumerate(self.mapa_sala.mapa):
             y = 50 + i * 50  # Distância entre fileiras
             num_mesas = len(fileira)
-            largura_canvas = 400  # Largura do canvas
+            largura_canvas = 800  # Largura do canvas
             espaco_total = num_mesas * 70  # Espaço total ocupado pelas mesas
             margem = (largura_canvas - espaco_total) // 2  # Margem para centralizar mesas
             
@@ -116,7 +126,7 @@ class MapaDeSalaApp:
         # Desenha a mesa do professor na fileira acima da última fileira adicionada
         if self.mapa_sala.mapa:  # Verifica se há fileiras
             mesa_prof_fileira = len(self.mapa_sala.mapa)  # Fileira logo acima da última
-            mesa_prof_x = (400 - 60) // 2  # Centraliza a mesa do professor
+            mesa_prof_x = (800 - 60) // 2  # Centraliza a mesa do professor
             mesa_prof_y = 50 + mesa_prof_fileira * 50  # Posição Y da mesa do professor
 
             self.canvas.create_rectangle(mesa_prof_x, mesa_prof_y, mesa_prof_x + 60, mesa_prof_y + 40, fill="yellow", outline="black")
