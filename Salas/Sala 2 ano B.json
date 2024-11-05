@@ -1,6 +1,13 @@
 {
-    "nome_sala": "Sala 01",
+    "nome_sala": "Sala 2 ano B",
     "mapa": [
+        [
+            "Mesa 1",
+            "Mesa 2",
+            "Mesa 3",
+            "Mesa 4",
+            "Mesa 5"
+        ],
         [
             "Mesa 1",
             "Mesa 2",

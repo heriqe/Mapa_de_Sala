@@ -1,10 +1,17 @@
 {
-    "nome_sala": "Sala 07",
+    "nome_sala": "Sala 2A",
     "mapa": [
+        [
+            "Lauren",
+            "Caio",
+            "Matheus",
+            "Julia",
+            "Gabriel"
+        ],
         [
             "Mesa 1",
             "Mesa 2",
-            "Mesa 3",
+            "Lucas",
             "Mesa 4",
             "Mesa 5"
         ],
@@ -23,8 +30,5 @@
             "Mesa 5"
         ]
     ],
-    "mesa_professor": {
-        "fileira": 0,
-        "mesa": 0
-    }
+    "mesa_professor": null
 }
