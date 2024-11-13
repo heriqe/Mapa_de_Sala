@@ -1,5 +1,5 @@
 import json
-
+import os
 class MapaDeSala:
     def __init__(self, nome_sala):
         self.nome_sala = nome_sala
@@ -44,6 +44,13 @@ class MapaDeSala:
         if self.mesa_professor:
             print(f"Mesa do professor: Fileira {self.mesa_professor[0] + 1}, Mesa {self.mesa_professor[1] + 1}")
 
+    def imprimir_mapa(self, caminho_arquivo):
+        try:
+            #Enviar o arquivo para a impressora
+            os.system(f"Mapa de sala enviando para impressora:{caminho_arquivo}")
+        except Exception as e :
+            print(f"Ocorreu um erro ao tentar imprimir o mapa:{e}")
+
 # Exemplo de uso do sistema
 
 # Inicializar a sala
@@ -59,8 +66,12 @@ sala.definir_mesa_professor(0, 0)  # Define a primeira mesa da primeira fileira 
 # Renomear a sala
 sala.nomear_sala("Laboratório de Informática")
 
+
 # Exportar o mapa para um arquivo JSON
 sala.exportar_mapa("mapa_de_sala.json")
 
 # Exibir o mapa na tela
 sala.exibir_mapa()
+
+# Imprimir o mapa
+sala.imprimir_mapa("mapa_de_sala.json")
